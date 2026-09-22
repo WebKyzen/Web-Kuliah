@@ -195,6 +195,8 @@ function applyThemeSettings() {
     const body = document.getElementById('app-body');
     const htmlEl = document.documentElement;
 
+    if (!body) return;
+
     body.classList.remove('font-sans', 'font-serif', 'font-mono');
     body.classList.add(appData.fontStyle || 'font-sans');
 
@@ -1001,6 +1003,7 @@ function closeDateModal() {
     if(modal) modal.classList.add('hidden');
 }
 
+// Inisialisasi Saat Halaman Dimuat
 document.addEventListener('DOMContentLoaded', () => {
     applyThemeSettings();
     switchTab('home');
