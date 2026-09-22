@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KuliahKu - Dashboard Akademik Pribadi</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: { 
+                        primary: {
+                            50: 'var(--primary-50)',
+                            100: 'var(--primary-100)',
+                            500: 'var(--primary-500)',
+                            600: 'var(--primary-600)',
+                            700: 'var(--primary-700)',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Custom CSS File -->
+    <link rel="stylesheet" href="style.css">
+</head>
+<body id="app-body" class="bg-[#f0f4f8] dark:bg-slate-950 text-slate-800 dark:text-slate-100 font-sans min-h-screen flex flex-col pb-24 sm:pb-16 selection:bg-primary-600 selection:text-white transition-colors">
+
+    <!-- Top App Header -->
+    <header class="bg-white/90 dark:bg-slate-900/90 backdrop-blur border-b border-slate-200 dark:border-slate-800 px-4 sm:px-8 py-3 flex justify-between items-center sticky top-0 z-30 shadow-sm w-full">
+        <div class="flex items-center space-x-3">
+            <div id="header-logo-bg" class="w-8 h-8 sm:w-9 sm:h-9 rounded-xl bg-primary-600 flex items-center justify-center text-white shadow-md transition-colors">
+                <i class="fa-solid fa-graduation-cap text-xs sm:text-sm"></i>
+            </div>
+            <div>
+                <h1 class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white tracking-wide">KuliahKu</h1>
+                <p id="page-title" class="text-[10px] sm:text-xs text-slate-500 dark:text-slate-400 font-medium">Dashboard Utama</p>
+            </div>
+        </div>
+        <div class="flex items-center space-x-2.5">
+            <span class="text-xs text-slate-500 dark:text-slate-400 hidden sm:inline" id="current-date-header">Selasa, 22 Sep 2026</span>
+            <button onclick="openSettingsModal()" class="w-7 h-7 sm:w-8 sm:h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 flex items-center justify-center text-slate-600 dark:text-slate-300 transition shadow-sm text-xs" title="Pengaturan Akun & Tampilan">
+                <i class="fa-solid fa-gear"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Main Dynamic Content Wrapper -->
+    <main id="main-content" class="flex-1 p-3 sm:p-6 space-y-4 sm:space-y-6 max-w-7xl w-full mx-auto">
+        <!-- Konten dimuat dinamis oleh JavaScript -->
+    </main>
+
+    <!-- Creator & Social Footer -->
+    <footer class="w-full max-w-7xl mx-auto px-4 py-3 mb-16 sm:mb-12 flex flex-col sm:flex-row items-center justify-between text-[11px] text-slate-500 dark:text-slate-400 border-t border-slate-200/60 dark:border-slate-800/60 gap-2">
+        <div class="flex items-center gap-1.5 font-medium">
+            <span>Crafted with <i class="fa-solid fa-heart text-red-500"></i> by</span>
+            <span class="font-bold text-slate-800 dark:text-slate-200">Made Rizqi Ridwan</span>
+        </div>
+        <div class="flex items-center space-x-3">
+            <a href="https://instagram.com" target="_blank" class="hover:text-primary-600 transition flex items-center gap-1">
+                <i class="fa-brands fa-instagram text-pink-500"></i> <span>Instagram</span>
+            </a>
+            <span>•</span>
+            <a href="https://tiktok.com" target="_blank" class="hover:text-primary-600 transition flex items-center gap-1">
+                <i class="fa-brands fa-tiktok text-slate-900 dark:text-white"></i> <span>TikTok</span>
+            </a>
+        </div>
+    </footer>
+
+    <!-- Bottom Navigation Bar (Mobile) -->
+    <nav class="sm:hidden fixed bottom-0 left-0 right-0 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-t border-slate-200 dark:border-slate-800 px-2 py-1.5 flex justify-around items-center z-40 shadow-lg">
+        <button onclick="switchTab('home')" id="nav-home" class="nav-btn flex flex-col items-center text-slate-400 dark:text-slate-500 transition py-1 px-2">
+            <i class="fa-solid fa-house text-sm"></i>
+            <span class="text-[9px] mt-0.5 font-medium">Dashboard</span>
+        </button>
+        <button onclick="switchTab('courses')" id="nav-courses" class="nav-btn flex flex-col items-center text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition py-1 px-2">
+            <i class="fa-solid fa-table-cells-large text-sm"></i>
+            <span class="text-[9px] mt-0.5 font-medium">Matriks & Nilai</span>
+        </button>
+        <button onclick="switchTab('calendar')" id="nav-calendar" class="nav-btn flex flex-col items-center text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition py-1 px-2">
+            <i class="fa-solid fa-calendar-days text-sm"></i>
+            <span class="text-[9px] mt-0.5 font-medium">Jadwal</span>
+        </button>
+        <button onclick="switchTab('tasks')" id="nav-tasks" class="nav-btn flex flex-col items-center text-slate-400 dark:text-slate-500 hover:text-slate-600 dark:hover:text-slate-300 transition py-1 px-2">
+            <i class="fa-solid fa-list-check text-sm"></i>
+            <span class="text-[9px] mt-0.5 font-medium">Tugas</span>
+        </button>
+    </nav>
+
+    <!-- Navigasi Desktop / Tablet -->
+    <div class="hidden sm:flex fixed bottom-6 left-1/2 -translate-x-1/2 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border border-slate-200 dark:border-slate-800 rounded-full px-6 py-2.5 shadow-xl z-40 items-center space-x-6">
+        <button onclick="switchTab('home')" id="nav-home-pc" class="nav-btn flex items-center space-x-2 text-xs font-semibold text-slate-500 dark:text-slate-400 transition hover:text-slate-900 dark:hover:text-white">
+            <i class="fa-solid fa-house"></i> <span>Dashboard</span>
+        </button>
+        <button onclick="switchTab('courses')" id="nav-courses-pc" class="nav-btn flex items-center space-x-2 text-xs font-medium text-slate-500 dark:text-slate-400 transition hover:text-slate-900 dark:hover:text-white">
+            <i class="fa-solid fa-table-cells-large"></i> <span>Matriks & Nilai</span>
+        </button>
+        <button onclick="switchTab('calendar')" id="nav-calendar-pc" class="nav-btn flex items-center space-x-2 text-xs font-medium text-slate-500 dark:text-slate-400 transition hover:text-slate-900 dark:hover:text-white">
+            <i class="fa-solid fa-calendar-days"></i> <span>Jadwal & Kalender</span>
+        </button>
+        <button onclick="switchTab('tasks')" id="nav-tasks-pc" class="nav-btn flex items-center space-x-2 text-xs font-medium text-slate-500 dark:text-slate-400 transition hover:text-slate-900 dark:hover:text-white">
+            <i class="fa-solid fa-list-check"></i> <span>Tugas & Deadline</span>
+        </button>
+    </div>
+
+    <!-- Modal Pengaturan Profil, Warna, Font, & Dark Mode -->
+    <div id="settings-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-md p-5 sm:p-6 shadow-2xl space-y-4">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
+                <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base flex items-center gap-2">
+                    <i class="fa-solid fa-sliders text-primary-600"></i> Pengaturan Akun & Tampilan
+                </h3>
+                <button onclick="closeSettingsModal()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div class="space-y-3 text-xs">
+                <div class="space-y-1">
+                    <label class="font-semibold text-slate-700 dark:text-slate-300">Nama Profil / Mahasiswa:</label>
+                    <input type="text" id="setting-username" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-200 focus:outline-none focus:border-primary-500" placeholder="Masukkan nama kamu...">
+                </div>
+
+                <div class="space-y-1">
+                    <label class="font-semibold text-slate-700 dark:text-slate-300">Mode Tampilan (Dark / Light):</label>
+                    <div class="flex gap-2">
+                        <button type="button" onclick="setDarkMode(false)" id="btn-light-mode" class="flex-1 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-semibold border border-slate-200 dark:border-slate-700 transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-sun text-amber-500"></i> Light
+                        </button>
+                        <button type="button" onclick="setDarkMode(true)" id="btn-dark-mode" class="flex-1 py-2 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 rounded-xl font-semibold border border-slate-200 dark:border-slate-700 transition flex items-center justify-center gap-1.5">
+                            <i class="fa-solid fa-moon text-blue-400"></i> Dark
+                        </button>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="font-semibold text-slate-700 dark:text-slate-300">Pilihan Warna Tema:</label>
+                    <div class="flex gap-2.5 pt-1">
+                        <button type="button" onclick="setThemeColor('blue')" class="w-8 h-8 rounded-full bg-blue-600 border-2 border-white shadow hover:scale-105 transition"></button>
+                        <button type="button" onclick="setThemeColor('purple')" class="w-8 h-8 rounded-full bg-purple-600 border-2 border-white shadow hover:scale-105 transition"></button>
+                        <button type="button" onclick="setThemeColor('emerald')" class="w-8 h-8 rounded-full bg-emerald-600 border-2 border-white shadow hover:scale-105 transition"></button>
+                        <button type="button" onclick="setThemeColor('orange')" class="w-8 h-8 rounded-full bg-amber-600 border-2 border-white shadow hover:scale-105 transition"></button>
+                    </div>
+                </div>
+
+                <div class="space-y-1">
+                    <label class="font-semibold text-slate-700 dark:text-slate-300">Gaya Font Aplikasi:</label>
+                    <select id="setting-font-family" class="w-full bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 rounded-xl px-3 py-2 text-slate-800 dark:text-slate-200 focus:outline-none focus:border-primary-500">
+                        <option value="font-sans">Inter (Modern Sans)</option>
+                        <option value="font-serif">Merriweather (Classic Serif)</option>
+                        <option value="font-mono">Fira Code (Monospace)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="flex gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <button onclick="closeSettingsModal()" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition">Batal</button>
+                <button onclick="saveAppSettings()" class="flex-1 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-semibold transition shadow-sm">Simpan Pengaturan</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Pengaturan Mata Kuliah -->
+    <div id="course-settings-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-2xl p-4 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
+                <h3 class="font-bold text-slate-900 dark:text-white text-sm sm:text-base flex items-center gap-2">
+                    <i class="fa-solid fa-gear text-primary-600"></i> Kelola & Edit Daftar Mata Kuliah
+                </h3>
+                <button onclick="closeCourseSettingsModal()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="editable-courses-container" class="space-y-3"></div>
+            <div class="flex gap-2 pt-2 border-t border-slate-100 dark:border-slate-800">
+                <button onclick="addNewCourseItem()" class="flex-1 py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1.5">
+                    <i class="fa-solid fa-plus"></i> Tambah Matkul
+                </button>
+                <button onclick="saveAllCoursesChanges()" class="flex-1 py-2.5 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-semibold transition flex items-center justify-center gap-1.5 shadow-sm">
+                    <i class="fa-solid fa-floppy-disk"></i> Simpan Perubahan
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Detail Tanggal Kalender -->
+    <div id="date-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-sm p-4 shadow-2xl space-y-3">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-2.5">
+                <h3 id="modal-date-title" class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm">Detail Tanggal</h3>
+                <button onclick="closeDateModal()" class="text-slate-400 hover:text-slate-600 text-base"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+            <div id="modal-date-content" class="space-y-2 max-h-52 overflow-y-auto text-xs text-slate-600 dark:text-slate-300"></div>
+            <button onclick="closeDateModal()" class="w-full py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-semibold transition">Tutup</button>
+        </div>
+    </div>
+
+    <!-- Modal Folder Mata Kuliah -->
+    <div id="folder-modal" class="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 hidden flex items-center justify-center p-3">
+        <div class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-800 rounded-2xl w-full max-w-xl p-4 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto">
+            <div class="flex justify-between items-center border-b border-slate-100 dark:border-slate-800 pb-3">
+                <div class="flex items-center space-x-3">
+                    <div class="w-9 h-9 rounded-xl bg-primary-50 dark:bg-slate-800 text-primary-600 flex items-center justify-center text-sm font-bold">
+                        <i class="fa-solid fa-folder-open"></i>
+                    </div>
+                    <div>
+                        <span id="modal-folder-id" class="text-[9px] px-2 py-0.5 bg-primary-50 dark:bg-slate-800 text-primary-600 font-semibold rounded">IF-XXX</span>
+                        <h3 id="modal-folder-title" class="font-bold text-slate-900 dark:text-white text-xs sm:text-sm mt-0.5">Nama Mata Kuliah</h3>
+                    </div>
+                </div>
+                <button onclick="closeFolderModal()" class="text-slate-400 hover:text-slate-600 text-lg"><i class="fa-solid fa-xmark"></i></button>
+            </div>
+
+            <div id="sessions-grid-wrapper" class="space-y-2">
+                <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                    <i class="fa-solid fa-folder-tree text-indigo-500"></i> Pilih Sub-Folder Sesi (1 - 8):
+                </label>
+                <div id="sessions-grid" class="grid grid-cols-2 sm:grid-cols-4 gap-2.5"></div>
+            </div>
+
+            <div id="session-detail-container" class="bg-slate-50 dark:bg-slate-800/50 border border-slate-200 dark:border-slate-700 rounded-xl p-4 space-y-3 hidden">
+                <div class="flex justify-between items-center border-b border-slate-200 dark:border-slate-700 pb-2.5">
+                    <h4 id="active-session-title" class="font-bold text-xs sm:text-sm text-slate-900 dark:text-white flex items-center gap-2">
+                        <i class="fa-solid fa-folder-open text-amber-500"></i> Sesi X
+                    </h4>
+                    <button onclick="backToSessionsGrid()" class="px-3 py-1 bg-slate-200 dark:bg-slate-700 hover:bg-slate-300 text-slate-700 dark:text-slate-200 rounded-lg text-xs font-semibold transition flex items-center gap-1.5">
+                        <i class="fa-solid fa-arrow-left"></i> Kembali
+                    </button>
+                </div>
+
+                <div class="space-y-2">
+                    <div class="flex justify-between items-center">
+                        <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-note-sticky text-amber-500"></i> Catatan & Link Materi Sesi
+                        </label>
+                        <div id="note-action-btns"></div>
+                    </div>
+                    <div id="note-display-box" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-3 text-xs text-slate-800 dark:text-slate-200 min-h-[60px] whitespace-pre-wrap hidden"></div>
+                    <textarea id="session-notes-input" rows="3" class="w-full bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-xl p-2.5 text-xs text-slate-800 dark:text-slate-200 focus:outline-none focus:border-primary-500 resize-none hidden" placeholder="Tulis catatan atau link Google Drive..."></textarea>
+                </div>
+
+                <div class="space-y-2 pt-2 border-t border-slate-200 dark:border-slate-700">
+                    <div class="flex justify-between items-center">
+                        <label class="text-xs font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
+                            <i class="fa-solid fa-cloud-arrow-up text-emerald-600"></i> File Tugas
+                        </label>
+                        <label class="px-3 py-1.5 bg-primary-600 hover:bg-primary-700 text-white rounded-xl text-xs font-semibold cursor-pointer shadow-sm transition flex items-center gap-1.5">
+                            <i class="fa-solid fa-plus text-[10px]"></i> Upload
+                            <input type="file" id="session-file-input" onchange="handleSessionFileUpload(event)" class="hidden">
+                        </label>
+                    </div>
+                    <div id="session-files-list" class="space-y-1.5 max-h-36 overflow-y-auto"></div>
+                </div>
+            </div>
+
+            <button onclick="closeFolderModal()" class="w-full py-2.5 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 text-slate-700 dark:text-slate-200 rounded-xl text-xs font-semibold transition">Tutup</button>
+        </div>
+    </div>
+
+    <!-- External JavaScript File -->
+    <script src="script.js"></script>
+</body>
+</html>
